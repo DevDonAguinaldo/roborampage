@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7xk8ih1mtgqm"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_kja5x"]
+[ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_pxo88"]
+[ext_resource type="Script" path="res://Player/Crosshair.gd" id="3_iy2gq"]
+[ext_resource type="PackedScene" uid="uid://dhkfr114f6r2y" path="res://Assets/smg.tscn" id="3_tiqqw"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0tt7d"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1shb3"]
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_kja5x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_0tt7d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_1shb3")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="SmoothCamera" type="Camera3D" parent="CameraPivot"]
+top_level = true
+script = ExtResource("2_pxo88")
+
+[node name="HitscanWeapon" parent="CameraPivot/SmoothCamera" instance=ExtResource("3_tiqqw")]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" type="Control" parent="CenterContainer"]
+layout_mode = 2
+script = ExtResource("3_iy2gq")
