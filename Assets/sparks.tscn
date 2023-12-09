@@ -1,0 +1,92 @@
+[gd_scene load_steps=9 format=3 uid="uid://c34t4vahtxb4d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xnckp"]
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="Curve" id="Curve_8fea0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_d7nwv"]
+curve = SubResource("Curve_8fea0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_stmjb"]
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_d7nwv")
+
+[sub_resource type="BoxMesh" id="BoxMesh_5rrfm"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="Animation" id="Animation_x5dhc"]
+resource_name = "Spark"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xp5cl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r3vyf"]
+_data = {
+"RESET": SubResource("Animation_xp5cl"),
+"Spark": SubResource("Animation_x5dhc")
+}
+
+[node name="Sparks" type="GPUParticles3D"]
+top_level = true
+material_override = SubResource("StandardMaterial3D_xnckp")
+cast_shadow = 0
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_stmjb")
+draw_pass_1 = SubResource("BoxMesh_5rrfm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_r3vyf")
+}
+autoplay = "Spark"

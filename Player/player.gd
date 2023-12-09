@@ -4,13 +4,25 @@ const SPEED = 5.0
 
 @export var jump_height: float = 1.0
 @export var fall_mulitiplier: float = 3.0
+@export var max_hp := 100
 
 @onready var camera_pivot: Node3D = $CameraPivot
+@onready var damage_animation_player: AnimationPlayer = $DamageTexture/DamageAnimationPlayer
+@onready var game_over_menu: Control = $GameOverMenu
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var mouse_motion := Vector2.ZERO
+var hp: int = max_hp:
+	set(value):
+		if value < hp:
+			damage_animation_player.stop(false)
+			damage_animation_player.play("Damage")
+
+		hp = value
+		if hp <= 0:
+			game_over_menu.game_over()
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("ui_cancel"):
