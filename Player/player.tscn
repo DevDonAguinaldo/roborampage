@@ -1,11 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7xk8ih1mtgqm"]
+[gd_scene load_steps=15 format=3 uid="uid://c7xk8ih1mtgqm"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_kja5x"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_pxo88"]
 [ext_resource type="Script" path="res://Player/Crosshair.gd" id="3_iy2gq"]
+[ext_resource type="PackedScene" uid="uid://dt7a1k1qnkiaj" path="res://Assets/rifle.tscn" id="3_nwblq"]
+[ext_resource type="Script" path="res://Player/WeaponHandler.gd" id="3_tb58y"]
 [ext_resource type="PackedScene" uid="uid://dhkfr114f6r2y" path="res://Assets/smg.tscn" id="3_tiqqw"]
 [ext_resource type="Texture2D" uid="uid://cr7toaq1w80q5" path="res://Player/damage.png" id="5_pahyx"]
 [ext_resource type="PackedScene" uid="uid://gd1m1qrk5ll2" path="res://Player/game_over_menu.tscn" id="6_6mgr0"]
+[ext_resource type="Script" path="res://Player/AmmoHandler.gd" id="6_ldacq"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_0tt7d"]
 
@@ -89,8 +92,6 @@ top_level = true
 cull_mask = 1048573
 script = ExtResource("2_pxo88")
 
-[node name="smg" parent="CameraPivot/SmoothCamera" instance=ExtResource("3_tiqqw")]
-
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraPivot/SmoothCamera"]
 remote_path = NodePath("../../../SubViewportContainer/SubViewport/WeaponCamera")
 
@@ -112,12 +113,28 @@ render_target_update_mode = 4
 cull_mask = 2
 fov = 40.0
 
+[node name="WeaponHandler" type="Node3D" parent="SubViewportContainer/SubViewport/WeaponCamera" node_paths=PackedStringArray("weapon_1", "weapon_2")]
+script = ExtResource("3_tb58y")
+weapon_1 = NodePath("rifle")
+weapon_2 = NodePath("smg")
+
+[node name="rifle" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" node_paths=PackedStringArray("ammo_handler") instance=ExtResource("3_nwblq")]
+ammo_handler = NodePath("../../AmmoHandler")
+
+[node name="smg" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" node_paths=PackedStringArray("ammo_handler") instance=ExtResource("3_tiqqw")]
+ammo_handler = NodePath("../../AmmoHandler")
+ammo_type = 1
+
+[node name="AmmoHandler" type="Node3D" parent="SubViewportContainer/SubViewport/WeaponCamera"]
+script = ExtResource("6_ldacq")
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Crosshair" type="Control" parent="CenterContainer"]
 layout_mode = 2
@@ -131,6 +148,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(576, 324)
+mouse_filter = 2
 texture = ExtResource("5_pahyx")
 
 [node name="DamageAnimationPlayer" type="AnimationPlayer" parent="DamageTexture"]

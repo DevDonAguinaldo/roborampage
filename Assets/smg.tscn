@@ -28,6 +28,7 @@ size = Vector3(0.1, 0.1, 0.1)
 
 [node name="smg" node_paths=PackedStringArray("weapon", "muzzle_flash") instance=ExtResource("1_d1l1q")]
 weapon = NodePath("SMG")
+automatic = true
 muzzle_flash = NodePath("MuzzleFlash")
 
 [node name="SMG" parent="." index="1" instance=ExtResource("2_344nb")]
