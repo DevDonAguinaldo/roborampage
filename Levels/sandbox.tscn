@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpem6pidm456c"]
+[gd_scene load_steps=11 format=3 uid="uid://dpem6pidm456c"]
 
 [ext_resource type="PackedScene" uid="uid://c7xk8ih1mtgqm" path="res://Player/player.tscn" id="1_3l378"]
 [ext_resource type="Material" uid="uid://pwcbesbsxk6l" path="res://Levels/Materials/GrayMaterial.tres" id="1_jt50l"]
 [ext_resource type="Material" uid="uid://dt6wo081eo33i" path="res://Levels/Materials/OrangeMaterial.tres" id="3_35fvo"]
 [ext_resource type="PackedScene" uid="uid://dohk2wepsgqsv" path="res://Enemy/enemy.tscn" id="4_t0jrd"]
+[ext_resource type="PackedScene" uid="uid://c0d4or4wpbme8" path="res://Pickups/bullet_pickup.tscn" id="5_ao3fn"]
+[ext_resource type="PackedScene" uid="uid://26oj77iuwvry" path="res://Pickups/small_bullet_pickup.tscn" id="6_vu8id"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5q1q0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -33,7 +35,7 @@ shadow_enabled = true
 environment = SubResource("Environment_0rkq1")
 
 [node name="Player" parent="." instance=ExtResource("1_3l378")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_yok7h")
@@ -200,3 +202,17 @@ size = Vector3(64, 1, 64)
 [node name="Enemy" parent="." instance=ExtResource("4_t0jrd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 15)
 attack_range = 5.0
+
+[node name="Pickups" type="Node3D" parent="."]
+
+[node name="BulletPickup" parent="Pickups" instance=ExtResource("5_ao3fn")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 8, 1, -8)
+
+[node name="BulletPickup2" parent="Pickups" instance=ExtResource("5_ao3fn")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -1, 1, -8)
+
+[node name="SmallBulletPickup" parent="Pickups" instance=ExtResource("6_vu8id")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 4, 1, -9)
+
+[node name="SmallBulletPickup2" parent="Pickups" instance=ExtResource("6_vu8id")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -5, 1, -9)

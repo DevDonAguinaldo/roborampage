@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c7xk8ih1mtgqm"]
+[gd_scene load_steps=17 format=3 uid="uid://c7xk8ih1mtgqm"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_kja5x"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_pxo88"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cr7toaq1w80q5" path="res://Player/damage.png" id="5_pahyx"]
 [ext_resource type="PackedScene" uid="uid://gd1m1qrk5ll2" path="res://Player/game_over_menu.tscn" id="6_6mgr0"]
 [ext_resource type="Script" path="res://Player/AmmoHandler.gd" id="6_ldacq"]
+[ext_resource type="FontFile" uid="uid://cw4qlcdtpvxd1" path="res://Assets/Roboto-Regular.ttf" id="9_57vbr"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_0tt7d"]
 
@@ -76,6 +77,12 @@ _data = {
 "RESET": SubResource("Animation_ldo6c")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_oyvji"]
+font = ExtResource("9_57vbr")
+font_size = 64
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_kja5x")
 
@@ -88,6 +95,7 @@ shape = SubResource("CapsuleShape3D_1shb3")
 [node name="CameraPivot" type="Node3D" parent="."]
 
 [node name="SmoothCamera" type="Camera3D" parent="CameraPivot"]
+unique_name_in_owner = true
 top_level = true
 cull_mask = 1048573
 script = ExtResource("2_pxo88")
@@ -110,6 +118,7 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="WeaponCamera" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
 cull_mask = 2
 fov = 40.0
 
@@ -125,8 +134,10 @@ ammo_handler = NodePath("../../AmmoHandler")
 ammo_handler = NodePath("../../AmmoHandler")
 ammo_type = 1
 
-[node name="AmmoHandler" type="Node3D" parent="SubViewportContainer/SubViewport/WeaponCamera"]
+[node name="AmmoHandler" type="Node3D" parent="SubViewportContainer/SubViewport/WeaponCamera" node_paths=PackedStringArray("ammo_label")]
+unique_name_in_owner = true
 script = ExtResource("6_ldacq")
+ammo_label = NodePath("../../../../MarginContainer/Label")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
@@ -156,6 +167,25 @@ libraries = {
 "": SubResource("AnimationLibrary_4sgyn")
 }
 autoplay = "RESET"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "999"
+label_settings = SubResource("LabelSettings_oyvji")
 
 [node name="GameOverMenu" parent="." instance=ExtResource("6_6mgr0")]
 visible = false

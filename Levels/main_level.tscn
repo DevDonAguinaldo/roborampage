@@ -1,0 +1,133 @@
+[gd_scene load_steps=9 format=3 uid="uid://e65nv6hamjc5"]
+
+[ext_resource type="Material" uid="uid://pwcbesbsxk6l" path="res://Levels/Materials/GrayMaterial.tres" id="1_fsrct"]
+[ext_resource type="PackedScene" uid="uid://c7xk8ih1mtgqm" path="res://Player/player.tscn" id="2_bc1k2"]
+[ext_resource type="PackedScene" uid="uid://dohk2wepsgqsv" path="res://Enemy/enemy.tscn" id="3_bm5e6"]
+[ext_resource type="PackedScene" uid="uid://c0d4or4wpbme8" path="res://Pickups/bullet_pickup.tscn" id="4_vqhdk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8m5h3"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_rjb1a"]
+sky_material = SubResource("ProceduralSkyMaterial_8m5h3")
+
+[sub_resource type="Environment" id="Environment_e2kk8"]
+background_mode = 2
+sky = SubResource("Sky_rjb1a")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_s67ix"]
+vertices = PackedVector3Array(-12.25, 0.5, 5.5, -11.5, 0.5, 5.5, -11.25, 0.5, 3.5, -12.5, 0.5, 3.5, -15.25, 0.5, -3.25, -15.25, 0.5, 3.5, -12.5, 0.5, 3.5, -8.25, 0.5, -0.25, -8.5, 0.5, -3.25, -8.25, 0.5, 0.5, -5.25, 0.5, 0.5, -5.25, 0.5, -0.25, -8.25, 0.5, -0.25, -12.5, 0.5, 3.5, -11.25, 0.5, 3.5, -8.25, 0.5, -0.25, -8.5, 0.5, 3.5, -8.25, 0.5, 0.5, -8.25, 0.5, -0.25, -11.25, 0.5, 3.5, -5.25, 0.5, -0.25, -5.25, 0.5, 0.5, -3.5, 0.5, 0.5, -3.25, 0.5, -0.5, -3.25, 0.5, -0.5, 0.75, 0.5, 3.5, 3.5, 0.5, 3.5, 3.5, 0.5, -3.25, -3.25, 0.5, -3.25, -0.5, 0.5, 3.5, -0.25, 0.5, 5.5, 0.5, 0.5, 5.5, 0.75, 0.5, 3.5, -3.25, 0.5, -0.5, -0.5, 0.5, 3.5, 0.75, 0.5, 3.5, -3.25, 0.5, -0.5, -3.5, 0.5, 0.5, -3.25, 0.5, 3.5, -0.5, 0.5, 3.5, -11.5, 0.5, 5.5, -12.25, 0.5, 5.5, -12.25, 0.5, 8.25, -11.5, 0.5, 8.5, -8.5, 0.5, 15.25, -8.25, 0.5, 12.5, -8.25, 0.5, 11.75, -11.5, 0.5, 8.5, -12.25, 0.5, 8.25, -13.25, 0.5, 8.75, -5.25, 0.5, 12.5, -5.25, 0.5, 11.75, -8.25, 0.5, 11.75, -8.25, 0.5, 12.5, -8.25, 0.5, 11.75, -8.5, 0.5, 8.75, -11.5, 0.5, 8.5, -13.25, 0.5, 8.75, -13.25, 0.5, 15.25, -8.5, 0.5, 15.25, -3.75, 0.5, 11.75, -5.25, 0.5, 11.75, -5.25, 0.5, 12.5, -3.25, 0.5, 12.75, -0.75, 0.5, 8.75, -3.25, 0.5, 8.75, -3.25, 0.5, 11.25, -3.25, 0.5, 11.25, -3.75, 0.5, 11.75, -3.25, 0.5, 12.75, 0.5, 0.5, 5.5, -0.25, 0.5, 5.5, -0.25, 0.5, 8.25, 0.5, 0.5, 8.5, -0.75, 0.5, 8.75, -3.25, 0.5, 12.75, -3.25, 0.5, 15.25, 1.5, 0.5, 15.25, 1.5, 0.5, 8.75, 0.5, 0.5, 8.5, 0.5, 0.5, 8.5, -0.25, 0.5, 8.25, -0.75, 0.5, 8.75, -0.75, 0.5, 8.75, -3.25, 0.5, 11.25, -3.25, 0.5, 12.75, -15.25, 2.5, 8.75, -15.25, 2.5, 11.5, -14.5, 2.5, 11.5, -14.5, 2.5, 8.75, 2.5, 2.5, 8.75, 2.5, 2.5, 11.5, 3.5, 2.5, 11.5, 3.5, 2.5, 8.75, -15.25, 1.5, 15.25, -14.5, 1.5, 15.25, -14.25, 1.5, 14.5, -14.5, 1.5, 12.75, -15.25, 1.5, 12.75, 2.5, 1.5, 12.75, 2.5, 1.5, 15.25, 3.5, 1.5, 15.25, 3.5, 1.5, 12.75)
+polygons = [PackedInt32Array(0, 3, 1), PackedInt32Array(1, 3, 2), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 8), PackedInt32Array(8, 5, 4), PackedInt32Array(12, 11, 9), PackedInt32Array(9, 11, 10), PackedInt32Array(15, 14, 13), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 19), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 23), PackedInt32Array(24, 28, 25), PackedInt32Array(25, 28, 26), PackedInt32Array(26, 28, 27), PackedInt32Array(30, 29, 31), PackedInt32Array(31, 29, 32), PackedInt32Array(35, 34, 33), PackedInt32Array(37, 36, 38), PackedInt32Array(38, 36, 39), PackedInt32Array(41, 40, 42), PackedInt32Array(42, 40, 43), PackedInt32Array(46, 45, 44), PackedInt32Array(49, 48, 47), PackedInt32Array(53, 52, 50), PackedInt32Array(50, 52, 51), PackedInt32Array(56, 55, 57), PackedInt32Array(57, 55, 54), PackedInt32Array(57, 54, 59), PackedInt32Array(57, 59, 58), PackedInt32Array(61, 60, 62), PackedInt32Array(62, 60, 63), PackedInt32Array(66, 65, 64), PackedInt32Array(69, 68, 67), PackedInt32Array(71, 70, 72), PackedInt32Array(72, 70, 73), PackedInt32Array(79, 78, 74), PackedInt32Array(74, 78, 75), PackedInt32Array(75, 78, 76), PackedInt32Array(76, 78, 77), PackedInt32Array(82, 81, 80), PackedInt32Array(85, 84, 83), PackedInt32Array(89, 88, 86), PackedInt32Array(86, 88, 87), PackedInt32Array(93, 92, 90), PackedInt32Array(90, 92, 91), PackedInt32Array(95, 94, 96), PackedInt32Array(96, 94, 97), PackedInt32Array(97, 94, 98), PackedInt32Array(102, 101, 99), PackedInt32Array(99, 101, 100)]
+
+[node name="MainLevel" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e2kk8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_bc1k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971841, 0)
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("3_bm5e6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 11)
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource("3_bm5e6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3, 2, 14)
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource("3_bm5e6")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -15, 1, -3)
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource("3_bm5e6")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -9, 1, 3)
+
+[node name="Enemy5" parent="Enemies" instance=ExtResource("3_bm5e6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 3, 9)
+
+[node name="Enemy6" parent="Enemies" instance=ExtResource("3_bm5e6")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 3, 11)
+
+[node name="Pickups" type="Node3D" parent="."]
+
+[node name="BulletPickup" parent="Pickups" instance=ExtResource("4_vqhdk")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 3, 3, 9)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_s67ix")
+
+[node name="Room" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+material_override = ExtResource("1_fsrct")
+use_collision = true
+flip_faces = true
+size = Vector3(8, 6, 8)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D/Room"]
+
+[node name="Corridor" type="CSGBox3D" parent="NavigationRegion3D/Room/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 6)
+flip_faces = true
+size = Vector3(2, 4, 4)
+
+[node name="Corridor2" type="CSGBox3D" parent="NavigationRegion3D/Room/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, -1, 12)
+flip_faces = true
+size = Vector3(2, 4, 4)
+
+[node name="Corridor3" type="CSGBox3D" parent="NavigationRegion3D/Room/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, -1, 0)
+flip_faces = true
+size = Vector3(2, 4, 4)
+
+[node name="Corridor4" type="CSGBox3D" parent="NavigationRegion3D/Room/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -1, 6)
+flip_faces = true
+size = Vector3(2, 4, 4)
+
+[node name="Room2" type="CSGBox3D" parent="NavigationRegion3D/Room/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+flip_faces = true
+size = Vector3(8, 6, 8)
+
+[node name="Room3" type="CSGBox3D" parent="NavigationRegion3D/Room/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 12)
+flip_faces = true
+size = Vector3(8, 6, 8)
+
+[node name="Room4" type="CSGBox3D" parent="NavigationRegion3D/Room/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+flip_faces = true
+size = Vector3(8, 6, 8)
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="NavigationRegion3D/Room"]
+operation = 2
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Room/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -2.5, 14)
+flip_faces = true
+size = Vector3(2, 1, 4)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Room/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -2, 10)
+flip_faces = true
+size = Vector3(2, 2, 4)
+
+[node name="CSGCombiner3D3" type="CSGCombiner3D" parent="NavigationRegion3D/Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 0)
+operation = 2
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Room/CSGCombiner3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -2.5, 14)
+flip_faces = true
+size = Vector3(2, 1, 4)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Room/CSGCombiner3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -2, 10)
+flip_faces = true
+size = Vector3(2, 2, 4)
